@@ -1,11 +1,14 @@
 var btnSearch;
+var btnClearWalls;
 var speedSlider;
 var algoTypeSelector;
+var vertexShapeSelector;
 
 var fps;
 
 var grid;
 
+var draggedVertex = null;
 
 function setup() {
   //createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -16,6 +19,8 @@ function setup() {
   setSliders();
   setSelectors();
   setGrid();
+  setStartVertex();
+  setEndVertex();
 }
 
 function draw() {
@@ -25,6 +30,14 @@ function draw() {
 
 function setGrid(){
   grid = new Grid(GRID_POS_X, GRID_POS_Y, GRID_ROWS, GRID_COLS);
+}
+
+function setStartVertex(){
+  grid.setVertexType(START_VERTEX_POS[0], START_VERTEX_POS[1], START_VERTEX);
+}
+
+function setEndVertex(){
+  grid.setVertexType(END_VERTEX_POS[0], END_VERTEX_POS[1], END_VERTEX);
 }
 
 function setButton(value, action, foreColor, backColor, pos, fontSize, borderRadius){
@@ -41,6 +54,7 @@ function setButton(value, action, foreColor, backColor, pos, fontSize, borderRad
 
 function setButtons(){
   btnSort = setButton('Search', search, color(YELLOW), color(BLUE), [width / 2 + 200, HEADER_HEIGHT / 3], FONT_SIZE3, '5%');
+  btnClearWalls = setButton('Clear Walls', clearWalls, color(YELLOW), color(BLUE), [width / 2 + 400, HEADER_HEIGHT / 3], FONT_SIZE3, '5%');
 }
 
 function setSlider(pos, minValue, maxValue, value, step, inputAction){
@@ -65,7 +79,8 @@ function setSelector(pos, options, changeAction){
 }
 
 function setSelectors(){
-	algoTypeSelector = setSelector(createVector(SCREEN_WIDTH * 0.4, HEADER_HEIGHT / 2), SEARCH_TYPES, setAlgo);
+  algoTypeSelector = setSelector(createVector(SCREEN_WIDTH * 0.4, HEADER_HEIGHT / 2), SEARCH_TYPES, setAlgo);
+  vertexShapeSelector = setSelector(createVector(SCREEN_WIDTH * 0.5, HEADER_HEIGHT / 2), VERTEX_SHAPES, setVertexShape)
 }
 
 function setSpeed(){
@@ -73,16 +88,71 @@ function setSpeed(){
   frameRate(fps);
 }
 
+function setVertexShape(){
+
+}
+
 function search(){
 
+}
+
+function clearWalls(){
+  for (let vertex of grid.vertices){
+    if (vertex.vertexType == WALL_VERTEX){
+      vertex.setVertexType(BLANK_VERTEX);
+    }
+  }
 }
 
 function setAlgo(){
 
 }
 
+function chooseVertex(){
+  draggedVertex = null;
+  for (let vertex of grid.vertices){
+    if (vertex.isClicked(mouseX,mouseY)){
+      if (vertex.vertexType == START_VERTEX || vertex.vertexType == END_VERTEX){
+        draggedVertex = vertex;
+        return;
+      }
+      if (vertex.vertexType == WALL_VERTEX){
+        //print('set vertex to blank');
+        vertex.setVertexType(BLANK_VERTEX);
+      }
+      else{
+        //print('set vertex to wall');
+        vertex.setVertexType(WALL_VERTEX);
+      }
+      
+    }
+  }
+}
+
 /* Mouse Events */
 
-//function mouseMoved(){}
+/*
+function mouseMoved(){
+  if (mouseIsPressed){
+    chooseVertex();
+  }
+}
+*/
+
+function mouseDragged(){
+  if (draggedVertex != null){
+    for (let vertex of grid.vertices){
+      if (vertex.isClicked(mouseX,mouseY)){
+        vertex.setVertexType(draggedVertex.vertexType);
+        
+      }
+    }
+    return;
+  }
+  chooseVertex();
+}
   
-//function mousePressed(){}
+
+function mousePressed(){
+  chooseVertex();
+}

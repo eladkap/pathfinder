@@ -42,16 +42,34 @@ const HEADER_HEIGHT = 100;
 /* VERTEX */
 const VERTEX_RADIUS = 12;
 
+/* VERTEX TYPES */
+const BLANK_VERTEX = 'B';
+const WALL_VERTEX = 'W';
+const START_VERTEX = 'S';
+const END_VERTEX = 'E';
+
 /* GRID */
 const GRID_POS_X = 20;
 const GRID_POS_Y = 120;
 const GRID_ROWS = 20;
 const GRID_COLS = 60;
 
+const START_VERTEX_POS = [10, 20];
+const END_VERTEX_POS = [10, 40];
+
+
+
 /* SEARCH */
-SEARCH_TYPES = [
+const SEARCH_TYPES = [
     'BFS',
     'DFS',
     'A*',
     'Dijkstra'
 ];
+
+/* VERTEX SHAPES */
+const VERTEX_SHAPES = [
+    'Square',
+    'Hexagon'
+];
+
