@@ -7,6 +7,8 @@ var vertexShapeSelector;
 var fps;
 
 var grid;
+var startVertex;
+var endVertex;
 
 var draggedVertex = null;
 
@@ -34,10 +36,12 @@ function setGrid(){
 
 function setStartVertex(){
   grid.setVertexType(START_VERTEX_POS[0], START_VERTEX_POS[1], START_VERTEX);
+  startVertex = grid.at(START_VERTEX_POS[0], START_VERTEX_POS[1]);
 }
 
 function setEndVertex(){
   grid.setVertexType(END_VERTEX_POS[0], END_VERTEX_POS[1], END_VERTEX);
+  endVertex = grid.at(END_VERTEX_POS[0], END_VERTEX_POS[1]);
 }
 
 function setButton(value, action, foreColor, backColor, pos, fontSize, borderRadius){
@@ -93,7 +97,18 @@ function setVertexShape(){
 }
 
 function search(){
-
+  if (algoTypeSelector.value() == 'BFS'){
+    bfs();
+  }
+  else if (algoTypeSelector.value() == 'DFS'){
+    dfs();
+  }
+  else if (algoTypeSelector.value() == 'Dijkstra'){
+    dijkstra();
+  }
+  else if (algoTypeSelector.value() == 'Astar'){
+    astar();
+  }
 }
 
 function clearWalls(){

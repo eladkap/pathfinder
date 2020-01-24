@@ -55,12 +55,24 @@ class Vertex{
         return this.parenet;
     }
 
-    getNeighbor(n){
-        return this.neighbors[n];
+    addNeighbor(neighbor){
+        this.neighbors.push(neighbor);
+    }
+
+    getNeighbor(i){
+        return this.neighbors[i];
+    }
+
+    getNeighbors(){
+        return this.neighbors;
     }
 
     setBackcolor(backColor){
         this.backColor = backColor;
+    }
+
+    getVertexType(){
+        return this.vertexType;
     }
 
     setVertexType(vertexType){
