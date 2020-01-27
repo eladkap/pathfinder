@@ -2,8 +2,10 @@
 const SCREEN_WIDTH = 1280;
 const SCREEN_HEIGHT = 900;
 
-const MIN_FPS = 10;
-const MAX_FPS = 60;
+const FPS = 30;
+const DELAY_IN_MILLISEC = 1;
+const MIN_SPEED = 1;
+const MAX_SPEED = 10;
 
 /* COLORS */
 const BLACK = [0, 0, 0];
@@ -41,6 +43,7 @@ const HEADER_HEIGHT = 100;
 
 /* VERTEX */
 const VERTEX_RADIUS = 12;
+const VERTEX_BORDER_SIZE = 0.5;
 
 /* VERTEX TYPES */
 const BLANK_VERTEX = 'B';
@@ -51,11 +54,11 @@ const END_VERTEX = 'E';
 /* GRID */
 const GRID_POS_X = 20;
 const GRID_POS_Y = 120;
-const GRID_ROWS = 20;
+const GRID_ROWS = 30;
 const GRID_COLS = 60;
 
-const START_VERTEX_POS = [10, 20];
-const END_VERTEX_POS = [10, 40];
+const START_VERTEX_POS = [15, 20];
+const END_VERTEX_POS = [20, 40];
 
 
 

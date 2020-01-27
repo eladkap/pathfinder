@@ -15,7 +15,7 @@ var draggedVertex = null;
 function setup() {
   //createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
   createCanvas(windowWidth, windowHeight);
-  fps = 30;
+  fps = FPS;
   frameRate(fps);
   setButtons();
   setSliders();
@@ -57,7 +57,7 @@ function setButton(value, action, foreColor, backColor, pos, fontSize, borderRad
 }
 
 function setButtons(){
-  btnSort = setButton('Search', search, color(YELLOW), color(BLUE), [width / 2 + 200, HEADER_HEIGHT / 3], FONT_SIZE3, '5%');
+  btnSearch = setButton('Search', runSearch, color(YELLOW), color(BLUE), [width / 2 + 200, HEADER_HEIGHT / 3], FONT_SIZE3, '5%');
   btnClearWalls = setButton('Clear Walls', clearWalls, color(YELLOW), color(BLUE), [width / 2 + 400, HEADER_HEIGHT / 3], FONT_SIZE3, '5%');
 }
 
@@ -69,7 +69,7 @@ function setSlider(pos, minValue, maxValue, value, step, inputAction){
 }
 
 function setSliders(){
-  speedSlider = setSlider(createVector(SCREEN_WIDTH * 0.2, HEADER_HEIGHT / 2), MIN_FPS, MAX_FPS, 10, 25, setSpeed);
+  speedSlider = setSlider(createVector(SCREEN_WIDTH * 0.2, HEADER_HEIGHT / 2), MIN_SPEED, MAX_SPEED, 1, 1, setSpeed);
 }
 
 function setSelector(pos, options, changeAction){
@@ -87,6 +87,16 @@ function setSelectors(){
   vertexShapeSelector = setSelector(createVector(SCREEN_WIDTH * 0.5, HEADER_HEIGHT / 2), VERTEX_SHAPES, setVertexShape)
 }
 
+function setEnabled(btn, value){
+	if (value){
+		btn.removeAttribute('disabled');
+	}
+	else{
+    btn.attribute('disabled', value);
+  }
+}
+	
+
 function setSpeed(){
   fps = speedSlider.value();
   frameRate(fps);
@@ -96,18 +106,48 @@ function setVertexShape(){
 
 }
 
-function search(){
+async function startSearch(){
   if (algoTypeSelector.value() == 'BFS'){
-    bfs();
+    return await bfs(grid, startVertex, endVertex);
   }
   else if (algoTypeSelector.value() == 'DFS'){
-    dfs();
+    return await dfs(grid, startVertex, endVertex);
   }
   else if (algoTypeSelector.value() == 'Dijkstra'){
-    dijkstra();
+    return await dijkstra(grid, startVertex, endVertex);
   }
   else if (algoTypeSelector.value() == 'Astar'){
-    astar();
+    return await astar(grid, startVertex, endVertex);
+  }
+}
+
+async function showPath(){
+  console.log('Show path...');
+  let path = [];
+  let v = endVertex;
+  while (v != startVertex){
+    path.push(v);
+    v = v.getParent();
+  }
+  for (let i = path.length - 1; i >= 0; i--){
+    let v = path[i];
+    if (v != endVertex && v != startVertex){
+      await sleep(DELAY_IN_MILLISEC * 10);
+      v.setBackcolor(YELLOW);
+    }
+  }
+}
+
+async function runSearch(){
+  console.log('Run search');
+  let result = await startSearch();
+  console.log('Search finished');
+  if (result){
+    console.log('Path found.');
+    showPath();
+  }
+  else{
+    console.log('No path found.');
   }
 }
 

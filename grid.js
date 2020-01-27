@@ -18,7 +18,7 @@ class Grid{
                 let w = 2 * VERTEX_RADIUS;
                 let x = this.pos.x + j * w;
                 let y = this.pos.y + i * w;
-                let vertex = new Vertex(x, y, i, j, VERTEX_RADIUS, '', WHITE, TURQUOISE, 0.3);
+                let vertex = new Vertex(x, y, i, j, VERTEX_RADIUS, '', WHITE, TURQUOISE, VERTEX_BORDER_SIZE);
                 mat[i][j] = vertex;
                 this.vertices.push(vertex);
             }
@@ -38,6 +38,14 @@ class Grid{
         return this.mat[i][j];
     }
 
+    size(){
+        return this.rows * this.cols;
+    }
+
+    getDist(u, v){
+        return 1;
+    }
+
     setNeighbors(){
         for (let i = 0; i < this.rows; i++){
             for (let j = 0; j < this.cols; j++){
@@ -55,5 +63,20 @@ class Grid{
 
     setVertexType(i, j, vertexType){
         this.mat[i][j].setVertexType(vertexType);
+    }
+
+    getVertexWithMinDist(){
+        let minDistance = Infinity;
+        let minVertex = null;
+        for (let i = 0; i < this.rows; i++){
+            for (let j = 0; j < this.cols; j++){
+                let v = this.mat[i][j];
+                if (v.getDistance() < minDistance){
+                    minDistance = v.getDistance();
+                    minVertex = v;
+                }
+            }
+        }
+        return minVertex;
     }
 }
