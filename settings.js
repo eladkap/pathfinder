@@ -58,7 +58,7 @@ const GRID_ROWS = 30;
 const GRID_COLS = 60;
 
 const START_VERTEX_POS = [15, 20];
-const END_VERTEX_POS = [20, 40];
+const END_VERTEX_POS = [15, 40];
 
 
 
@@ -66,8 +66,8 @@ const END_VERTEX_POS = [20, 40];
 const SEARCH_TYPES = [
     'BFS',
     'DFS',
-    'A*',
-    'Dijkstra'
+    'A*'
+    //'Dijkstra'
 ];
 
 /* VERTEX SHAPES */

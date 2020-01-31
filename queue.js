@@ -9,7 +9,7 @@ class Queue{
 
     dequeue(){
         if (this.arr.length > 0){
-            return this.arr.splice(0, 1);
+            return this.arr.splice(0, 1)[0];
         }
     }
 

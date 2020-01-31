@@ -7,7 +7,6 @@ class Vertex{
         this.r = r;
         this.w = 2 * r;
         this.label = label;
-        this.type = 'blank';
         this.backColor = backColor;
         this.borderColor = borderColor;
         this.borderWeight = borderWeight;
@@ -15,6 +14,7 @@ class Vertex{
         this.focused = false;
         this.vertexType = BLANK_VERTEX;
         this.parent = null;
+        this.distance = 0;
         this.neighbors = [];
     }
 
@@ -52,7 +52,15 @@ class Vertex{
     }
 
     getParent(){
-        return this.parenet;
+        return this.parent;
+    }
+
+    getDistance(){
+        return this.distance;
+    }
+
+    setDistance(d){
+        this.distance = d;
     }
 
     addNeighbor(neighbor){

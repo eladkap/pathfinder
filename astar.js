@@ -1,3 +1,3 @@
-function astar(grid){
+async function astar(grid, startVertex, endVertex){
 
 }
