@@ -6,6 +6,7 @@ Path-finding algorithms visualization
 - A*
 ### Technologies
 - Path-finding Algorithms
+- Maze Generation Algorithm
 - Object Oriented Programming
 - Async-Await Mechanism
 ### Launch
