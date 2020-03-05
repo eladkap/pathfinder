@@ -14,7 +14,6 @@ var draggedVertex = null;
 var prevVertex = null;
 
 function setup() {
-  //createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
   createCanvas(windowWidth, windowHeight);
   fps = FPS;
   frameRate(fps);
@@ -104,7 +103,9 @@ function setSpeed(){
 }
 
 function setVertexShape(){
-
+  for (let vertex of grid.vertices){
+    vertex.setShapeType(vertexShapeSelector.value());
+  }
 }
 
 async function startSearch(){
@@ -161,7 +162,7 @@ function clearWalls(){
 }
 
 function setAlgo(){
-
+  return;
 }
 
 function chooseVertex(){
@@ -169,64 +170,37 @@ function chooseVertex(){
   for (let vertex of grid.vertices){
     if (vertex.isClicked(mouseX,mouseY)){
         draggedVertex = vertex;
-
-        // start or end is chosen
         if (vertex == startVertex || vertex == endVertex){
-          return;
+          vertex.setChosen(!vertex.isChosen());
         }
-
-        // wall is chosen
-        if (vertex.vertexType == WALL_VERTEX){
+        else if (vertex.vertexType == WALL_VERTEX){
           vertex.setVertexType(BLANK_VERTEX);
         }
-        // blank is chosen
         else{
-          vertex.setVertexType(WALL_VERTEX);
+          if (startVertex.isChosen()){ 
+             startVertex.setChosen(false);   
+            vertex.setVertexType(START_VERTEX);
+            startVertex.setVertexType(BLANK_VERTEX);
+            startVertex = vertex;      
+          }
+          else if (endVertex.isChosen()){
+            endVertex.setChosen(false);   
+            vertex.setVertexType(END_VERTEX);
+            endVertex.setVertexType(BLANK_VERTEX);
+            endVertex = vertex;      
+          }
+          else{
+            vertex.setVertexType(WALL_VERTEX);
+          }
+        }
       }
     }
-  }
 }
 
 /* Mouse Events */
-
-/*
-function mouseMoved(){
-  if (mouseIsPressed){
-    chooseVertex();
-  }
-}
-*/
-
 function mouseDragged(){
   if (draggedVertex != null){
-    // start or end vertex is dragged
-    if (draggedVertex == startVertex || draggedVertex == endVertex){
-      for (let vertex of grid.vertices){
-        if (vertex.isClicked(mouseX,mouseY) && vertex != draggedVertex){
-          prevVertex = draggedVertex;
-          draggedVertex = vertex;
-
-          prevVertex.setBackcolor(YELLOW);
-          vertex.setBackcolor(PURPLE);
-
-          //prevVertex.setVertexType(BLANK_VERTEX);
-          //draggedVertex.setVertexType(START_VERTEX);
-
-          if (draggedVertex.getVertexType() == START_VERTEX){
-            //startVertex = draggedVertex;
-            //draggedVertex.setVertexType(START_VERTEX);
-          }
-          else{
-            //draggedVertex.setVertexType(END_VERTEX);
-          }
-          
-          //draggedVertex.setVertexType(START_VERTEX);
-          //vertex.setVertexType(draggedVertex.vertexType);
-        }
-      }
-    }
-    // wall or blank vertex is dragged
-    else{
+    if (draggedVertex != startVertex && draggedVertex != endVertex){
       for (let vertex of grid.vertices){
         if (vertex.isClicked(mouseX,mouseY) && vertex != startVertex && vertex != endVertex){
           vertex.setVertexType(draggedVertex.vertexType);
@@ -235,7 +209,6 @@ function mouseDragged(){
     }
   }
 }
-  
 
 function mousePressed(){
   chooseVertex();

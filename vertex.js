@@ -12,17 +12,37 @@ class Vertex{
         this.borderWeight = borderWeight;
         this.visited = false;
         this.focused = false;
+        this.chosen = false;
         this.vertexType = BLANK_VERTEX;
+        this.shapeType = 'Square';
         this.parent = null;
         this.distance = 0;
         this.neighbors = [];
     }
 
     draw(){
-        strokeWeight(this.borderWeight);
-        stroke(this.borderColor);
+        let borderClr = this.borderColor;
+        let borderWei = this.borderWeight;
+        if (this.chosen){
+            borderClr = BLACK;
+            borderWei = 3;
+        }
+        strokeWeight(borderWei);
+        stroke(borderClr);
         fill(this.backColor);
-        rect(this.pos.x, this.pos.y, 2 * this.r, 2 * this.r);
+        if (this.shapeType == 'Square'){
+            rect(this.pos.x, this.pos.y, 2 * this.r, 2 * this.r);
+        }
+        else if (this.shapeType == 'Hexagon'){
+            beginShape();
+            vertex(this.cpos.x - this.r, this.cpos.y);
+            vertex(this.cpos.x - int(0.5 * this.r), int(this.cpos.y - sqrt(3) / 2 * this.r));
+            vertex(this.cpos.x + int(0.5 * this.r), int(this.cpos.y - sqrt(3) / 2 * this.r));
+            vertex(this.cpos.x + this.r, this.cpos.y);
+            vertex(this.cpos.x + int(0.5 * this.r), int(this.cpos.y + sqrt(3) / 2 * this.r));
+            vertex(this.cpos.x - int(0.5 * this.r), int(this.cpos.y + sqrt(3) / 2 * this.r));
+            endShape(CLOSE);
+        }
     }
 
     isVisited(){
@@ -33,12 +53,20 @@ class Vertex{
         return this.focused;
     }
 
+    isChosen(){
+        return this.chosen;
+    }
+
     setVisited(value){
         this.visited = value;
     }
 
     setFocus(value){
         this.focused = value;
+    }
+
+    setChosen(value){
+        this.chosen = value;
     }
 
     isClicked(mouseX, mouseY){
@@ -100,5 +128,9 @@ class Vertex{
         else if (this.isVisited()){
             this.setBackcolor(YELLOW);
         }
+    }
+
+    setShapeType(shapeType){
+        this.shapeType = shapeType;
     }
 }
