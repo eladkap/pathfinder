@@ -1,5 +1,8 @@
 var btnSearch;
 var btnClearWalls;
+var btnReset;
+var btnGenerateMazeRecursively;
+var btnGenerateMazeRandomly;
 var speedSlider;
 var algoTypeSelector;
 var vertexShapeSelector;
@@ -57,8 +60,10 @@ function setButton(value, action, foreColor, backColor, pos, fontSize, borderRad
 }
 
 function setButtons(){
-  btnSearch = setButton('Search', runSearch, color(YELLOW), color(BLUE), [width / 2 + 200, HEADER_HEIGHT / 3], FONT_SIZE3, '5%');
-  btnClearWalls = setButton('Clear Walls', clearWalls, color(YELLOW), color(BLUE), [width / 2 + 400, HEADER_HEIGHT / 3], FONT_SIZE3, '5%');
+  btnSearch = setButton('Search', runSearch, color(YELLOW), color(BLUE), [width / 2 - 200, HEADER_HEIGHT / 3], FONT_SIZE3, '5%');
+  btnClearWalls = setButton('Clear Walls', clearWalls, color(YELLOW), color(BLUE), [width / 2, HEADER_HEIGHT / 3], FONT_SIZE3, '5%');
+  btnGenerateMazeRecursively = setButton('Generate Maze Recursively', generateMazeRecursively, color(YELLOW), color(BLUE), [width / 2 + 200, HEADER_HEIGHT / 3], FONT_SIZE3, '5%');
+  btnGenerateMazeRandomly = setButton('Generate Maze Randomly', generateMazeRandomly, color(YELLOW), color(BLUE), [width / 2 + 600, HEADER_HEIGHT / 3], FONT_SIZE3, '5%');
 }
 
 function setSlider(pos, minValue, maxValue, value, step, inputAction){
@@ -157,6 +162,24 @@ function clearWalls(){
   for (let vertex of grid.vertices){
     if (vertex.vertexType == WALL_VERTEX){
       vertex.setVertexType(BLANK_VERTEX);
+    }
+  }
+}
+
+function generateMazeRecursively(){
+  startVertex.setVisited(true);
+  
+}
+
+function generateMazeRandomly(){
+  for (let vertex of grid.vertices){
+    if (vertex.getVertexType() != START_VERTEX && vertex.getVertexType() != END_VERTEX){
+      if (random() < WALL_DENSITY){
+        vertex.setVertexType(WALL_VERTEX);
+      }
+      else{
+        vertex.setVertexType(BLANK_VERTEX);
+      }
     }
   }
 }
