@@ -34,6 +34,10 @@ function draw() {
   DrawSpeedSelector();
 }
 
+function reset() {
+  setup();
+}
+
 function setGrid() {
   grid = new Grid(GRID_POS_X, GRID_POS_Y, GRID_ROWS, GRID_COLS);
 }
@@ -86,6 +90,15 @@ function setButtons() {
     runSearch,
     color(YELLOW),
     color(BLUE),
+    [width * 0.3, HEADER_HEIGHT / 3],
+    FONT_SIZE3,
+    "5%"
+  );
+  btnReset = setButton(
+    "Reset",
+    reset,
+    color(YELLOW),
+    color(BLUE),
     [width * 0.4, HEADER_HEIGHT / 3],
     FONT_SIZE3,
     "5%"
@@ -95,7 +108,7 @@ function setButtons() {
     clearWalls,
     color(YELLOW),
     color(BLUE),
-    [width / 2, HEADER_HEIGHT / 3],
+    [width * 0.5, HEADER_HEIGHT / 3],
     FONT_SIZE3,
     "5%"
   );

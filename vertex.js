@@ -13,6 +13,7 @@ class Vertex {
     this.visited = false;
     this.focused = false;
     this.chosen = false;
+    this.heuristics = 1; // Heuristics value - euclidean distance to target
     this.vertexType = BLANK_VERTEX;
     this.shapeType = "Square";
     this.parent = null;
@@ -78,6 +79,10 @@ class Vertex {
 
   setChosen(value) {
     this.chosen = value;
+  }
+
+  setHeuristics(h) {
+    this.heuristics = h;
   }
 
   isClicked(mouseX, mouseY) {
