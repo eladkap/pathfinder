@@ -81,6 +81,10 @@ class Vertex {
     this.chosen = value;
   }
 
+  getHeuristics() {
+    return this.heuristics;
+  }
+
   setHeuristics(h) {
     this.heuristics = h;
   }

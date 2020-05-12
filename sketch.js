@@ -1,8 +1,8 @@
 var btnSearch;
 var btnClearWalls;
 var btnReset;
-var btnGenerateMazeRecursively;
-var btnGenerateMazeRandomly;
+var btnGenerateMaze;
+var btnGenerateWalls;
 var speedSlider;
 var algoTypeSelector;
 var vertexShapeSelector;
@@ -23,7 +23,10 @@ function setup() {
   setButtons();
   setSliders();
   setSelectors();
-  reset();
+  // reset();
+  setGrid();
+  setStartVertex();
+  setEndVertex();
 }
 
 function draw() {
@@ -33,9 +36,7 @@ function draw() {
 }
 
 function reset() {
-  setGrid();
-  setStartVertex();
-  setEndVertex();
+  grid.reset();
 }
 
 function setGrid() {
@@ -112,18 +113,18 @@ function setButtons() {
     FONT_SIZE3,
     "5%"
   );
-  btnGenerateMazeRecursively = setButton(
+  btnGenerateMaze = setButton(
     "Generate Maze",
-    generateMazeRecursively,
+    generateMaze,
     color(YELLOW),
     color(BLUE),
     [width * 0.7, HEADER_HEIGHT / 3],
     FONT_SIZE3,
     "5%"
   );
-  btnGenerateMazeRandomly = setButton(
+  btnGenerateWalls = setButton(
     "Generate Walls",
-    generateMazeRandomly,
+    generateWalls,
     color(YELLOW),
     color(BLUE),
     [width * 0.8, HEADER_HEIGHT / 3],
@@ -241,11 +242,9 @@ function clearWalls() {
   }
 }
 
-function generateMazeRecursively() {
-  startVertex.setVisited(true);
-}
+function generateMaze() {}
 
-function generateMazeRandomly() {
+function generateWalls() {
   for (let vertex of grid.vertices) {
     if (
       vertex.getVertexType() != START_VERTEX &&

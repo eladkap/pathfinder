@@ -61,12 +61,7 @@ const END_VERTEX_POS = [15, 40];
 const WALL_DENSITY = 0.2;
 
 /* SEARCH */
-const SEARCH_TYPES = [
-  "BFS",
-  "DFS",
-  "A*",
-  //'Dijkstra'
-];
+const SEARCH_TYPES = ["BFS", "DFS", "A*"]; //"Dijkstra"
 
 /* VERTEX SHAPES */
 const VERTEX_SHAPES = ["Square", "Hexagon"];

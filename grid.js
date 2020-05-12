@@ -82,18 +82,14 @@ class Grid {
     this.mat[i][j].setVertexType(vertexType);
   }
 
-  getVertexWithMinDist() {
-    let minDistance = Infinity;
-    let minVertex = null;
+  reset() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
-        let v = this.mat[i][j];
-        if (v.getDistance() < minDistance) {
-          minDistance = v.getDistance();
-          minVertex = v;
+        this.mat[i][j].setVisited(false);
+        if (this.mat[i][j].getVertexType() == BLANK_VERTEX) {
+          this.mat[i][j].setBackcolor(WHITE);
         }
       }
     }
-    return minVertex;
   }
 }
