@@ -23,9 +23,7 @@ function setup() {
   setButtons();
   setSliders();
   setSelectors();
-  setGrid();
-  setStartVertex();
-  setEndVertex();
+  reset();
 }
 
 function draw() {
@@ -35,7 +33,9 @@ function draw() {
 }
 
 function reset() {
-  setup();
+  setGrid();
+  setStartVertex();
+  setEndVertex();
 }
 
 function setGrid() {
@@ -108,21 +108,21 @@ function setButtons() {
     clearWalls,
     color(YELLOW),
     color(BLUE),
-    [width * 0.5, HEADER_HEIGHT / 3],
+    [width * 0.55, HEADER_HEIGHT / 3],
     FONT_SIZE3,
     "5%"
   );
   btnGenerateMazeRecursively = setButton(
-    "Generate Maze Recursively",
+    "Generate Maze",
     generateMazeRecursively,
     color(YELLOW),
     color(BLUE),
-    [width * 0.6, HEADER_HEIGHT / 3],
+    [width * 0.7, HEADER_HEIGHT / 3],
     FONT_SIZE3,
     "5%"
   );
   btnGenerateMazeRandomly = setButton(
-    "Generate Maze Randomly",
+    "Generate Walls",
     generateMazeRandomly,
     color(YELLOW),
     color(BLUE),
@@ -199,6 +199,8 @@ async function startSearch() {
     return await dfs(grid, startVertex, endVertex);
   } else if (algoTypeSelector.value() == "A*") {
     return await astar(grid, startVertex, endVertex);
+  } else if (algoTypeSelector.value() == "Dijkstra") {
+    return await dijkstra(grid, startVertex, endVertex);
   }
 }
 
