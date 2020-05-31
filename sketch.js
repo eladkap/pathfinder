@@ -33,6 +33,7 @@ function draw() {
   background(WHITE);
   grid.draw();
   DrawSpeedSelector();
+  DrawAlgoSelector();
 }
 
 function reset() {
@@ -63,6 +64,14 @@ function DrawSpeedSelector() {
   textSize(16);
   text("Low", width * 0.05, HEADER_HEIGHT * 0.6);
   text("High", width * 0.14, HEADER_HEIGHT * 0.6);
+}
+
+function DrawAlgoSelector() {
+  textStyle(NORMAL);
+  textAlign(CENTER);
+  textSize(20);
+  fill(BLUE);
+  text("Algo", width * 0.21, HEADER_HEIGHT * 0.3);
 }
 
 function setButton(
@@ -167,11 +176,11 @@ function setSelectors() {
     SEARCH_TYPES,
     setAlgo
   );
-  vertexShapeSelector = setSelector(
-    createVector(SCREEN_WIDTH * 0.4, HEADER_HEIGHT / 2),
-    VERTEX_SHAPES,
-    setVertexShape
-  );
+  // vertexShapeSelector = setSelector(
+  //   createVector(SCREEN_WIDTH * 0.4, HEADER_HEIGHT / 2),
+  //   VERTEX_SHAPES,
+  //   setVertexShape
+  // );
 }
 
 function setEnabled(btn, value) {
@@ -242,7 +251,45 @@ function clearWalls() {
   }
 }
 
-function generateMaze() {}
+function generateMaze() {
+  /*
+  Choose the initial cell, mark it as visited and push it to the stack
+  While the stack is not empty:
+    - Pop a cell from the stack and make it a current cell
+    - If the current cell has any neighbours which have not been visited:
+      - Push the current cell to the stack
+      - Choose one of the unvisited neighbours
+      - Remove the wall between the current cell and the chosen cell
+      - Mark the chosen cell as visited and push it to the stack
+  */
+  /*
+  for (let vertex of grid.vertices) {
+    if (vertex.vertexType != START_VERTEX && vertex.vertexType != END_VERTEX) {
+      vertex.setVertexType(WALL_VERTEX);
+    }
+  }
+
+  let stack = new Stack();
+  stack.push(startVertex);
+  while (!stack.isEmpty()) {
+    let currVertex = stack.pop();
+    let S = new Set();
+    for (let neighbor of currVertex.getNeighbors()) {
+      if (!neighbor.isVisited()) {
+        S.add(neighbor);
+      }
+    }
+    if (S.size > 0) {
+      stack.push(currVertex);
+      let vertex = S.values().next().value;
+      currVertex.setVertexType(BLANK_VERTEX);
+      vertex.setVertexType(BLANK_VERTEX);
+      vertex.setVisited(true);
+      stack.push(vertex);
+    }
+  }
+  */
+}
 
 function generateWalls() {
   for (let vertex of grid.vertices) {
@@ -267,6 +314,7 @@ function chooseVertex() {
   draggedVertex = null;
   for (let vertex of grid.vertices) {
     if (vertex.isClicked(mouseX, mouseY)) {
+      console.log(vertex.row + "," + vertex.col);
       draggedVertex = vertex;
       if (vertex == startVertex || vertex == endVertex) {
         vertex.setChosen(!vertex.isChosen());

@@ -13,7 +13,9 @@ class Vertex {
     this.visited = false;
     this.focused = false;
     this.chosen = false;
-    this.heuristics = 1; // Heuristics value - euclidean distance to target
+    this.fValue = 0; // A-star algo - f value
+    this.gValue = 0; // A-star algo - g value
+    this.hValue = 0; // A-strt algo - h value (Heuristics value - euclidean distance to target)
     this.vertexType = BLANK_VERTEX;
     this.shapeType = "Square";
     this.parent = null;
@@ -81,12 +83,28 @@ class Vertex {
     this.chosen = value;
   }
 
-  getHeuristics() {
-    return this.heuristics;
+  getFValue() {
+    return this.fValue;
   }
 
-  setHeuristics(h) {
-    this.heuristics = h;
+  setFValue(f) {
+    this.fValue = f;
+  }
+
+  getGValue() {
+    return this.fValue;
+  }
+
+  setGValue(g) {
+    this.fValue = g;
+  }
+
+  getHValue() {
+    return this.hValue;
+  }
+
+  setHValue(h) {
+    this.hValue = h;
   }
 
   isClicked(mouseX, mouseY) {
