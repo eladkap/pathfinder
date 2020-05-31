@@ -240,6 +240,7 @@ async function runSearch() {
     showPath();
   } else {
     console.log("No path found.");
+    alert("No path found.");
   }
 }
 
