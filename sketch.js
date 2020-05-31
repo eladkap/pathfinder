@@ -192,8 +192,10 @@ function setEnabled(btn, value) {
 }
 
 function setSpeed() {
-  fps = speedSlider.value();
-  frameRate(fps);
+  // fps = speedSlider.value();
+  // frameRate(fps);
+  DELAY_IN_MILLISEC = map(speedSlider.value(), 1, 10, 100, 1);
+  console.log(DELAY_IN_MILLISEC);
 }
 
 function setVertexShape() {

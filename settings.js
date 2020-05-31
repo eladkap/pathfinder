@@ -3,7 +3,7 @@ const SCREEN_WIDTH = 1280;
 const SCREEN_HEIGHT = 900;
 
 const FPS = 30;
-const DELAY_IN_MILLISEC = 1;
+var DELAY_IN_MILLISEC = 1;
 const MIN_SPEED = 1;
 const MAX_SPEED = 10;
 
