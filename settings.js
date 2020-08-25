@@ -2,7 +2,7 @@
 const SCREEN_WIDTH = 1280;
 const SCREEN_HEIGHT = 900;
 
-const FPS = 30;
+const FPS = 5;
 var DELAY_IN_MILLISEC = 1;
 const MIN_SPEED = 1;
 const MAX_SPEED = 10;
@@ -30,7 +30,7 @@ const TURQUOISE = [32, 114, 106];
 const TURQUOISELIGHT = [50, 180, 166];
 
 /* FONT */
-const FONT_FAMILY = "Copperplate Gothic Light"; // 'Bodoni MT Black'
+const FONT_FAMILY = "Copperplate Gothic Light";
 const FONT_SIZE1 = 16;
 const FONT_SIZE2 = 20;
 const FONT_SIZE3 = 24;
@@ -61,7 +61,7 @@ const END_VERTEX_POS = [15, 40];
 const WALL_DENSITY = 0.2;
 
 /* SEARCH */
-const SEARCH_TYPES = ["BFS", "DFS", "A*"]; //"Dijkstra"
+const SEARCH_TYPES = ["BFS", "DFS", "A*"];
 
 /* VERTEX SHAPES */
 const VERTEX_SHAPES = ["Square", "Hexagon"];

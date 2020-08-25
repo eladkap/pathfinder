@@ -3,6 +3,7 @@ var btnClearWalls;
 var btnReset;
 var btnGenerateMaze;
 var btnGenerateWalls;
+var btnFillWalls;
 var speedSlider;
 var algoTypeSelector;
 var vertexShapeSelector;
@@ -118,19 +119,28 @@ function setButtons() {
     clearWalls,
     color(YELLOW),
     color(BLUE),
-    [width * 0.55, HEADER_HEIGHT / 3],
+    [width * 0.5, HEADER_HEIGHT / 3],
     FONT_SIZE3,
     "5%"
   );
-  btnGenerateMaze = setButton(
-    "Generate Maze",
-    generateMaze,
+  btnFillWalls = setButton(
+    "Fill Walls",
+    fillWalls,
     color(YELLOW),
     color(BLUE),
-    [width * 0.7, HEADER_HEIGHT / 3],
+    [width * 0.6, HEADER_HEIGHT / 3],
     FONT_SIZE3,
     "5%"
   );
+  // btnGenerateMaze = setButton(
+  //   "Generate Maze",
+  //   generateMaze,
+  //   color(YELLOW),
+  //   color(BLUE),
+  //   [width * 0.7, HEADER_HEIGHT / 3],
+  //   FONT_SIZE3,
+  //   "5%"
+  // );
   btnGenerateWalls = setButton(
     "Generate Walls",
     generateWalls,
@@ -181,6 +191,10 @@ function setSelectors() {
   //   VERTEX_SHAPES,
   //   setVertexShape
   // );
+}
+
+async function generateMaze() {
+  await GenerateMazeIterative(grid, startVertex);
 }
 
 function setEnabled(btn, value) {
@@ -254,46 +268,6 @@ function clearWalls() {
   }
 }
 
-function generateMaze() {
-  /*
-  Choose the initial cell, mark it as visited and push it to the stack
-  While the stack is not empty:
-    - Pop a cell from the stack and make it a current cell
-    - If the current cell has any neighbours which have not been visited:
-      - Push the current cell to the stack
-      - Choose one of the unvisited neighbours
-      - Remove the wall between the current cell and the chosen cell
-      - Mark the chosen cell as visited and push it to the stack
-  */
-  /*
-  for (let vertex of grid.vertices) {
-    if (vertex.vertexType != START_VERTEX && vertex.vertexType != END_VERTEX) {
-      vertex.setVertexType(WALL_VERTEX);
-    }
-  }
-
-  let stack = new Stack();
-  stack.push(startVertex);
-  while (!stack.isEmpty()) {
-    let currVertex = stack.pop();
-    let S = new Set();
-    for (let neighbor of currVertex.getNeighbors()) {
-      if (!neighbor.isVisited()) {
-        S.add(neighbor);
-      }
-    }
-    if (S.size > 0) {
-      stack.push(currVertex);
-      let vertex = S.values().next().value;
-      currVertex.setVertexType(BLANK_VERTEX);
-      vertex.setVertexType(BLANK_VERTEX);
-      vertex.setVisited(true);
-      stack.push(vertex);
-    }
-  }
-  */
-}
-
 function generateWalls() {
   for (let vertex of grid.vertices) {
     if (
@@ -305,6 +279,17 @@ function generateWalls() {
       } else {
         vertex.setVertexType(BLANK_VERTEX);
       }
+    }
+  }
+}
+
+function fillWalls() {
+  for (let vertex of grid.vertices) {
+    if (
+      vertex.getVertexType() != START_VERTEX &&
+      vertex.getVertexType() != END_VERTEX
+    ) {
+      vertex.setVertexType(WALL_VERTEX);
     }
   }
 }

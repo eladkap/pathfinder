@@ -21,6 +21,7 @@ class Vertex {
     this.parent = null;
     this.distance = 0;
     this.neighbors = [];
+    this.directions = { right: null, left: null, top: null, bottom: null };
   }
 
   draw() {

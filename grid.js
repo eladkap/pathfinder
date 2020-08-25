@@ -21,8 +21,8 @@ class Grid {
         let vertex = new Vertex(
           x,
           y,
-          i,
           j,
+          i,
           VERTEX_RADIUS,
           "",
           WHITE,
@@ -71,6 +71,19 @@ class Grid {
               abs(a + b) == 1
             ) {
               vertex.addNeighbor(this.mat[i + a][j + b]);
+
+              if (a == 0 && b == -1) {
+                vertex.directions["left"] = this.mat[i + a][j + b];
+              }
+              if (a == 0 && b == 1) {
+                vertex.directions["right"] = this.mat[i + a][j + b];
+              }
+              if (a == -1 && b == 0) {
+                vertex.directions["top"] = this.mat[i + a][j + b];
+              }
+              if (a == 1 && b == 0) {
+                vertex.directions["bottom"] = this.mat[i + a][j + b];
+              }
             }
           }
         }
