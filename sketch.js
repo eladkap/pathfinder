@@ -123,15 +123,15 @@ function setButtons() {
     FONT_SIZE3,
     "5%"
   );
-  btnFillWalls = setButton(
-    "Fill Walls",
-    fillWalls,
-    color(YELLOW),
-    color(BLUE),
-    [width * 0.6, HEADER_HEIGHT / 3],
-    FONT_SIZE3,
-    "5%"
-  );
+  // btnFillWalls = setButton(
+  //   "Fill Walls",
+  //   fillWalls,
+  //   color(YELLOW),
+  //   color(BLUE),
+  //   [width * 0.6, HEADER_HEIGHT / 3],
+  //   FONT_SIZE3,
+  //   "5%"
+  // );
   // btnGenerateMaze = setButton(
   //   "Generate Maze",
   //   generateMaze,
@@ -146,7 +146,7 @@ function setButtons() {
     generateWalls,
     color(YELLOW),
     color(BLUE),
-    [width * 0.8, HEADER_HEIGHT / 3],
+    [width * 0.6, HEADER_HEIGHT / 3],
     FONT_SIZE3,
     "5%"
   );
