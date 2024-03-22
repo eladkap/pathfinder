@@ -28,7 +28,9 @@ class Application {
             canvasRect.y - VERTEX_WIDTH * 4,
             gridRows,
             gridCols
-        )
+        );
+        this.setStartVertex();
+        this.setEndVertex();
     }
 
     setStartVertex() {
@@ -50,7 +52,7 @@ class Application {
     }
 
     reset() {
-        this.grid.reset();
+        this.setGrid();
         this.updateCanvas();
     }
 
@@ -222,8 +224,7 @@ class Application {
         this.setButtons();
         this.setSearchAlgoSelector();
         this.setSearchAlgo();
-        this.setStartVertex();
-        this.setEndVertex();
+        
 
         this.draw();
     }
