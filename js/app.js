@@ -197,7 +197,7 @@ class Application {
             return await bfs(this.grid, this.startVertex, this.endVertex);
         } else if (this.searchAlgoSelector.value == "DFS") {
             return await dfs(this.grid, this.startVertex, this.endVertex);
-        } else if (this.searchAlgoSelector.value == "A*") {
+        } else if (this.searchAlgoSelector.value == "A-star") {
             return await astar(this.grid, this.startVertex, this.endVertex);
         }
     }

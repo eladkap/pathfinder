@@ -12,6 +12,10 @@ class Utils {
       Math.abs(vertex1.row - vertex2.row) + Math.abs(vertex1.col - vertex2.col)
     );
   }
+
+  static euclideanDistance(vertex1, vertex2) {
+    return Math.sqrt((vertex1.row - vertex2.row) ** 2 + (vertex1.col - vertex2.col) ** 2);
+  }
   
   static removeFromArray(arr, element) {
     for (let i = arr.length - 1; i >= 0; i--) {

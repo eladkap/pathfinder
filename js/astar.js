@@ -1,3 +1,15 @@
+function getVertexWithLowestFValue(vertexSet) {
+  minValue = vertexSet[0].getFValue();
+  minIndex = 0;
+  for (let i = 0; i < vertexSet.length; i++) {
+    if (vertexSet[i].getFValue() < vertexSet[minIndex].getFValue()) {
+      minIndex = i;
+      minValue = vertexSet[i].getFValue();
+    }
+  }
+  return vertexSet[minIndex];
+}
+
 async function astar(grid, startVertex, endVertex) {
   console.log("A*");
 
@@ -17,13 +29,7 @@ async function astar(grid, startVertex, endVertex) {
   startVertex.setFValue(0);
   while (openSet.length > 0) {
     // Get the current vertex from open set that has the lowest f value
-    let currentIndex = 0;
-    for (let i = 0; i < openSet.length; i++) {
-      if (openSet[i].getFValue() < openSet[currentIndex].getFValue()) {
-        currentIndex = i;
-      }
-    }
-    let current = openSet[currentIndex];
+    let current = getVertexWithLowestFValue(openSet);
 
     // If we reached the end
     if (current == endVertex) {
@@ -31,7 +37,7 @@ async function astar(grid, startVertex, endVertex) {
       return true;
     }
 
-    RemoveFromArray(openSet, current);
+    Utils.removeFromArray(openSet, current);
     closedSet.push(current);
 
     for (let neighbor of current.getNeighbors()) {
@@ -51,7 +57,7 @@ async function astar(grid, startVertex, endVertex) {
         }
 
         let heuristics = neighbor.setHValue(
-          ManhattanDistance(neighbor, endVertex)
+          Utils.manhattanDistance(neighbor, endVertex)
         );
         neighbor.setHValue(heuristics);
         neighbor.setFValue(neighbor.getGValue() + neighbor.getHValue());
