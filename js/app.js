@@ -14,12 +14,13 @@ class Application {
         this.btnGenerateWalls = null;
         this.btnClearWalls = null;
         this.btnSearch = null;
-        this.btnStop = null;
         this.searchAlgoSelector = null;
         this.searchAlgo = null;
+        this.btnReset = null;
     }
 
     setGrid() {
+        console.log('set grid');
         let canvasRect = this.canvas.getBoundingClientRect();
         let gridRows = Math.floor(canvasRect.height / VERTEX_WIDTH) - 6;
         let gridCols = Math.floor(canvasRect.width / VERTEX_WIDTH) - 2;
@@ -52,6 +53,7 @@ class Application {
     }
 
     reset() {
+        console.log('reset');
         this.setGrid();
         this.updateCanvas();
     }
@@ -61,10 +63,10 @@ class Application {
     }
 
     setButtons() {
-        this.btnGenerateWalls = document.getElementById('btn-generate-walls');
-        this.btnClearWalls = document.getElementById('btn-clear-walls');
-        this.btnSearch = document.getElementById('btn-search');
-        this.btnStop = document.getElementById('btn-stop');
+        this.btnGenerateWalls = document.getElementById('a-generate-walls');
+        this.btnClearWalls = document.getElementById('a-clear-walls');
+        this.btnSearch = document.getElementById('a-search');
+        this.btnReset = document.getElementById('a-reset');
     }
 
     setEnabled(control, value) {
@@ -86,35 +88,32 @@ class Application {
         console.log(`Search algo chosen: ${this.searchAlgo}`);
     }
 
-    stopSearch() {
-        location.reload();
-    }
-
     chooseVertex(mouseX, mouseY) {
         this.draggedVertex = null;
         for (let vertex of this.grid.vertices) {
-          if (vertex.isClicked(mouseX, mouseY)) {
-            this.draggedVertex = vertex;
-            if (vertex == this.startVertex || vertex == this.endVertex) {
-              vertex.setChosen(!vertex.isChosen());
-            } else if (vertex.vertexType == WALL_VERTEX) {
-              vertex.setVertexType(BLANK_VERTEX);
-            } else {
-              if (this.startVertex.isChosen()) {
-                this.startVertex.setChosen(false);
-                vertex.setVertexType(START_VERTEX);
-                this.startVertex.setVertexType(BLANK_VERTEX);
-                this.startVertex = vertex;
-              } else if (this.endVertex.isChosen()) {
-                this.endVertex.setChosen(false);
-                vertex.setVertexType(END_VERTEX);
-                this.endVertex.setVertexType(BLANK_VERTEX);
-                this.endVertex = vertex;
-              } else {
-                vertex.setVertexType(WALL_VERTEX);
-              }
-            }
-          }
+            if (vertex.isClicked(mouseX, mouseY)) {
+                this.draggedVertex = vertex;
+                
+                if (vertex == this.startVertex || vertex == this.endVertex) {
+                    vertex.setChosen(!vertex.isChosen());
+                } else if (vertex.vertexType == WALL_VERTEX) {
+                    vertex.setVertexType(BLANK_VERTEX);
+                } else {
+                    if (this.startVertex.isChosen()) {
+                        this.startVertex.setChosen(false);
+                        vertex.setVertexType(START_VERTEX);
+                        this.startVertex.setVertexType(BLANK_VERTEX);
+                        this.startVertex = vertex;
+                    } else if (this.endVertex.isChosen()) {
+                        this.endVertex.setChosen(false);
+                        vertex.setVertexType(END_VERTEX);
+                        this.endVertex.setVertexType(BLANK_VERTEX);
+                        this.endVertex = vertex;
+                    } else {
+                        vertex.setVertexType(WALL_VERTEX);
+                    }
+                }
+            }    
         }
     }
 
@@ -138,6 +137,7 @@ class Application {
     }
 
     onMouseClicked(event) {
+        console.log('mouse clicked');
         let canvasRect = this.canvas.getBoundingClientRect();
         let mousePos = Utils.translateMouseToCanvasPosition(event.clientX, event.clientY, this.canvas, canvasRect); 
         this.chooseVertex(mousePos.x, mousePos.y);
@@ -145,7 +145,7 @@ class Application {
     }
       
     onMouseReleased() {
-        // prevVertex = null;
+        console.log('mouse released');
         draggedVertex = null;
     }
 
@@ -225,7 +225,6 @@ class Application {
         this.setSearchAlgoSelector();
         this.setSearchAlgo();
         
-
         this.draw();
     }
 

@@ -1,7 +1,10 @@
 var app = new Application();
 
 /* Mouse Events */
-document.onmousedown = function(e) {
+// document.onmousedown = function(e) {
+//   app.onMouseClicked(e);
+// }
+app.canvas.onmousedown = function(e) {
   app.onMouseClicked(e);
 }
 
