@@ -184,6 +184,7 @@ class Application {
     }
 
     clearWalls() {
+        console.log('Clear walls');
         for (let vertex of this.grid.vertices) {
             if (vertex.vertexType == WALL_VERTEX) {
                 vertex.setVertexType(BLANK_VERTEX);
@@ -193,6 +194,7 @@ class Application {
     }
       
     generateWalls() {
+        console.log('Generate walls');
         for (let vertex of this.grid.vertices) {
             if (
                 vertex.getVertexType() != START_VERTEX &&

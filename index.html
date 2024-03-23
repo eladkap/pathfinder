@@ -25,7 +25,7 @@
           </a>
         </li>
         <li>
-          <a id="a-clear-walls" onclick="app.clearWalls()">Clear walls</button>
+          <a id="a-clear-walls" onclick="app.clearWalls()">Clear walls</a>
         </li>
         <li>
           <label for="search-algo-selector">Algorithms</label>
@@ -39,11 +39,11 @@
           <button id="btn-search" class="btn-visualize" onclick="app.runSearch()">Visualize</button>
         </li>
         <li>
-          <a id="a-clear-path" onclick="app.clearPath()">Clear path</button>
+          <a id="a-clear-path" onclick="app.clearPath()">Clear path</a>
         </li>
         <li>
           <label for="algo-speed-selector">Speed</label>
-          <select name="search--algo-selector" id="search-algo-selector" onchange="app.chooseAlgoSpeed(event)">
+          <select name="search--algo-selector" id="algo-speed-selector" onchange="app.chooseAlgoSpeed(event)">
             <option value="fast">Fast</option>
             <option value="average">Average</option>
             <option value="slow">Slow</option>
