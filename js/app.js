@@ -16,7 +16,10 @@ class Application {
         this.btnSearch = null;
         this.searchAlgoSelector = null;
         this.searchAlgo = null;
-        this.btnReset = null;
+        this.algoSpeedSelector = null;
+        this.algoSpeed = null;
+
+        this.btnClearPath = null;
     }
 
     setGrid() {
@@ -66,7 +69,7 @@ class Application {
         this.btnGenerateWalls = document.getElementById('a-generate-walls');
         this.btnClearWalls = document.getElementById('a-clear-walls');
         this.btnSearch = document.getElementById('a-search');
-        this.btnReset = document.getElementById('a-reset');
+        this.btnClearPath = document.getElementById('a-clear-path');
     }
 
     setEnabled(control, value) {
@@ -79,13 +82,39 @@ class Application {
         this.searchAlgoSelector = document.getElementById('search-algo-selector');
     }
 
+    setAlgoSpeedSelector() {
+        this.algoSpeedSelector = document.getElementById('algo-speed-selector');
+    }
+
     setSearchAlgo() {
         this.searchAlgo = this.setSearchAlgoSelector.value;
+    }
+
+    setAlgoSpeed() {
+        this.algoSpeed = this.setAlgoSpeedSelector.value;
     }
 
     chooseSearchAlgoOption(event) {
         this.searchAlgo = event.target.value;
         console.log(`Search algo chosen: ${this.searchAlgo}`);
+    }
+
+    chooseAlgoSpeed(event) {
+        this.algoSpeed = event.target.value;
+        this.setDelay();
+        console.log(`Algo speed chosen: ${this.algoSpeed}`);
+    }
+
+    setDelay() {
+        if (this.algoSpeed == 'fast') {
+            DELAY_IN_MILLISEC = 1;
+        }
+        else if (this.algoSpeed == 'average') {
+            DELAY_IN_MILLISEC = 10;
+        }
+        else {
+            DELAY_IN_MILLISEC = 15;
+        }
     }
 
     chooseVertex(mouseX, mouseY) {
@@ -179,8 +208,14 @@ class Application {
         this.updateCanvas();
     }
 
+    clearPath() {
+        this.grid.reset();
+        this.updateCanvas();
+    }
+
     async runSearch() {
         console.log('Run search');
+        // todo: setEnable(false) to all links and visualize button
         let result = await this.startSearch();
         console.log('Search finished');
         if (result) {
@@ -190,6 +225,7 @@ class Application {
           console.log('No path found.');
           window.alert('No path found.');
         }
+        // todo: setEnable(true) to all links and visualize button
     }
 
     async startSearch() {
@@ -224,6 +260,7 @@ class Application {
         this.setButtons();
         this.setSearchAlgoSelector();
         this.setSearchAlgo();
+        this.setAlgoSpeed();
         
         this.draw();
     }

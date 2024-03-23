@@ -1,6 +1,5 @@
-const DELAY_IN_MILLISEC = 10;
-const MIN_SPEED = 1;
-const MAX_SPEED = 10;
+var DELAY_IN_MILLISEC = 5;
+
 
 /* COLORS */
 const BLACK = 'rgb(0, 0, 0)';
@@ -48,11 +47,6 @@ const END_VERTEX = "E";
 /* GRID */
 const GRID_POS_X = 20;
 const GRID_POS_Y = 120;
-// const GRID_ROWS = 30;
-// const GRID_COLS = 60;
-
-// const START_VERTEX_POS = [15, 20];
-// const END_VERTEX_POS = [15, 40];
 
 const WALL_DENSITY = 0.2;
 
