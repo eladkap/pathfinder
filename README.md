@@ -1,4 +1,4 @@
-# Path-finding Visualization
+# Pathfinding Visualization
 
 Path-finding algorithms visualization
 

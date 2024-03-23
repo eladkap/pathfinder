@@ -3,7 +3,7 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Path-finding Visualization</title>
+    <title>Pathfinding Visualization</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/stylesheet.css'>
   </head>
@@ -11,37 +11,45 @@
   <body>
 
     <div class="navbar">
-      <h2>Path-finding Visualizer</h2>
+      <a href="index.html" class="brand">
+        Pathfinding Visualizer
+      </a>
+
       <ul>
         <!-- <li>
           <button id="btn-generate-maze" onclick="app.generateMaze()">Generate maze</button>
         </li> -->
         <li>
-          <button id="btn-generate-walls" onclick="app.generateWalls()">Generate walls</button>
+          <a id="a-generate-walls" onclick="app.generateWalls()">
+            Generate walls
+          </a>
         </li>
         <li>
-          <button id="btn-clear-walls" onclick="app.clearWalls()">Clear walls</button>
+          <a id="a-clear-walls" onclick="app.clearWalls()">Clear walls</button>
         </li>
         <li>
-          <label for="search--algo-selector">Search algorithm</label>
+          <label for="search--algo-selector">Algorithms</label>
           <select name="search--algo-selector" id="search-algo-selector" onchange="app.chooseSearchAlgoOption(event)">
-            <option value="BFS">BFS</option>
-            <option value="DFS">DFS</option>
-            <option value="A-star">A*</option>
+            <option value="BFS">Breadth First Search</option>
+            <option value="DFS">Depth First Search</option>
+            <option value="A-star">A-Star</option>
           </select>
         </li>
         <li>
-          <button id="btn-search" onclick="app.runSearch()">Search</button>
+          <button id="btn-search" class="btn-visualize" onclick="app.runSearch()">Visualize</button>
         </li>
         <li>
-          <button id="btn-stop" onclick="app.stopSearch()">Stop</button>
-        </li>
-        <li>
-          <button id="btn-reset" onclick="app.reset()">Reset</button>
+          <a id="a-reset" onclick="app.reset()">Reset</button>
         </li>
       </ul>
     </div>
   
+    <div class="container-center">
+      <p style="text-align: center; color: black;">
+        Pick an algorithm and visualize it.
+      </p>
+    </div>
+
     <div class="container-center">
         <canvas id="my-canvas" class="my-canvas">
         </canvas>

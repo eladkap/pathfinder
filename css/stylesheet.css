@@ -4,15 +4,17 @@ body {
     height: 100%;
     width: 100%;
     overflow: hidden;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: var(--background-color);
 
     --text-color: white;
-    --background-color: rgb(50,50,50);
-    --canvas-backcolor: rgb(70, 70, 70);
+    --background-color: rgb(250, 250, 250);
+    --navbar-backcolor: #2d394b;
+    --canvas-backcolor: rgb(250, 250, 250);
     --header-color: rgb(250, 250, 250);
     --para-color: rgb(120, 200, 240);
     --btn-backcolor: #2d394b;
+    --btn-visualize-bg: rgb(10, 90, 10);
     --btn-backcolor-disabled: rgb(180, 180, 180);
     --btn-forecolor: white;
     --btn-hover-forecolor: #40e0d0;
@@ -28,32 +30,34 @@ h1, h2, h3, h4, h5 {
 }
 
 .container-center {
-   display: block; 
-   align-items: center;
-   justify-content: center;
+    margin: 0 auto;
+    background-color: var(--background-color);
+    display: block;
+    align-items: center;
+    justify-content: center;
 }
 
 .navbar {
-    width: 100%;
+    background-color: var(--navbar-backcolor);
     margin: 0 auto;
+    width: 100%;
+    max-height: 4rem;
+    padding-left: 1rem;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
 }
 
-ul {
+.navbar ul {
     list-style-type: none;
-    display: list-item;
+    background-color: var(--topnav-backcolor);
+    display: block;
     align-items: center;
     justify-content: space-evenly;
     overflow: hidden;
-    transition: height .2 cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 ul li {
     float: left;
-    font-size: 48px;
-    padding: 1rem;
+    margin-left: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,34 +67,69 @@ ul button {
     font-size: medium;
     background-color: var(--btn-backcolor);
     color: var(--btn-forecolor);
-    padding: 15px;
+    border-radius: 5px;
     display: block;
     text-align: center;
-    min-width: 10rem;
 }
 
 ul button:hover {
     color: var(--btn-hover-forecolor);
-    transition: 0.5s; 
+    transition: 0s;
+}
+
+.btn-visualize {
+    cursor: pointer;
+    font-size: large;
+    background-color: var(--btn-visualize-bg);
+    color: var(--btn-forecolor);
+    border-radius: 5px;
+    margin-top: 0.2rem;
+    min-width: 8rem;
+    display: block;
+    text-align: center;
+    border-style: none;
+}
+
+ul a {
+    cursor: pointer;
+    font-size: large;
+    color: var(--btn-forecolor);
+    margin-top: 0.3rem;
+}
+
+ul a:hover {
+    color: var(--btn-hover-forecolor);
+}
+
+a {
+    text-decoration: none;
+    color: var(--header-color);
+}
+
+a:hover {
+    color: var(--btn-hover-forecolor);
+}
+
+.brand {
+    font-size: x-large;
+    margin-top: 1rem;
+    margin-left: 1rem;
 }
 
 label {
     font-family: sans-serif;
     font-size: medium;
-    padding-right: 10px;
+    font-weight: bold;
+    margin-left: 1rem;
     color: var(--text-color);
-    padding-top: 1rem;
+    padding-top: 0.3rem;
 }
 
 select {
     background-color: var(--btn-backcolor);
     color: var(--btn-forecolor);
     font-size: medium;
-    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-top: 0.3rem;
 }
 
-.array-size-slider  {
-    background: var(--btn-backcolor);
-    color: var(--btn-forecolor);
-    margin-top: 1rem;
-}
