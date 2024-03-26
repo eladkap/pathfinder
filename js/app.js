@@ -27,11 +27,17 @@ class Application {
         let canvasRect = this.canvas.getBoundingClientRect();
         let gridRows = Math.floor(canvasRect.height / VERTEX_WIDTH) - 6;
         let gridCols = Math.floor(canvasRect.width / VERTEX_WIDTH) - 2;
+        let vertexRadius = VERTEX_RADIUS
+        // let gridRows = GRID_ROWS;
+        // let gridCols = GRID_COLS;
+        // let vertexRadius = canvasRect.width / GRID_COLS;
+
         this.grid = new Grid(
             canvasRect.x + VERTEX_WIDTH,
             canvasRect.y - VERTEX_WIDTH * 4,
             gridRows,
-            gridCols
+            gridCols, 
+            vertexRadius
         );
         this.setStartVertex();
         this.setEndVertex();
@@ -183,11 +189,7 @@ class Application {
     }
 
     clearWalls() {
-        for (let vertex of this.grid.vertices) {
-            if (vertex.vertexType == WALL_VERTEX) {
-                vertex.setVertexType(BLANK_VERTEX);
-            }
-        }
+        this.grid.clearWalls();
         this.updateCanvas();
     }
       
@@ -204,6 +206,12 @@ class Application {
             }
           }
         }
+        this.updateCanvas();
+    }
+
+    generateMaze() {
+        console.log('gen maze');
+        generateMazeRecursively(this.grid);
         this.updateCanvas();
     }
 

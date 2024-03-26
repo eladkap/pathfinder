@@ -24,6 +24,10 @@ class Utils {
       }
     }
   }
+
+  static randomRange(a, b) {
+    return Math.floor(Math.random() * (b - a) + a);
+  }
   
   static translateMouseToCanvasPosition(mouseX, mouseY, canvas, canvasRect) {
     let mx = mouseX - canvasRect.left - scrollX;

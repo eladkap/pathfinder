@@ -1,13 +1,13 @@
 class Grid {
-  constructor(x, y, rows, cols) {
+  constructor(x, y, rows, cols, vertexRadius) {
     this.pos = new Vector(x, y);
     this.rows = rows;
     this.cols = cols;
-    this.mat = this.initMatrix(rows, cols);
+    this.mat = this.initMatrix(rows, cols, vertexRadius);
     this.setNeighbors();
   }
 
-  initMatrix(rows, cols) {
+  initMatrix(rows, cols, vertexRadius) {
     this.vertices = [];
     let mat = [];
     for (let i = 0; i < rows; i++) {
@@ -15,7 +15,7 @@ class Grid {
     }
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
-        let w = 2 * VERTEX_RADIUS;
+        let w = 2 * vertexRadius;
         let x = this.pos.x + j * w;
         let y = this.pos.y + i * w;
         let vertex = new Vertex(
@@ -23,7 +23,7 @@ class Grid {
           y,
           j,
           i,
-          VERTEX_RADIUS,
+          vertexRadius,
           "",
           WHITE,
           TURQUOISE,
@@ -54,6 +54,10 @@ class Grid {
 
   get(i, j) {
     return this.mat[i][j];
+  }
+
+  setVertexType(i, j, vertexType) {
+    this.mat[i][j].setVertexType(vertexType);
   }
 
   size() {
@@ -101,6 +105,14 @@ class Grid {
 
   setVertexType(i, j, vertexType) {
     this.mat[i][j].setVertexType(vertexType);
+  }
+
+  clearWalls() {
+    for (let vertex of this.vertices) {
+      if (vertex.vertexType == WALL_VERTEX) {
+          vertex.setVertexType(BLANK_VERTEX);
+      }
+    }
   }
 
   reset() {

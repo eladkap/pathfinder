@@ -47,6 +47,8 @@ const END_VERTEX = "E";
 /* GRID */
 const GRID_POS_X = 20;
 const GRID_POS_Y = 120;
+const GRID_ROWS = 31;
+const GRID_COLS = 77;
 
 const WALL_DENSITY = 0.2;
 

@@ -37,6 +37,13 @@ class Vertex {
     app.ctx.rect(this.pos.x, this.pos.y, 2 * this.r, 2 * this.r);
     app.ctx.stroke();
     app.ctx.fill();
+
+    if (this.chosen) {
+      app.ctx.textAlign = 'center';
+      app.ctx.fillStyle = 'white';
+      app.ctx.fillText('*', this.pos.x + this.width / 2, this.pos.y);
+    }
+
   }
 
   isVisited() {

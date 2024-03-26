@@ -1,3 +1,72 @@
+async function generateMazeRecursivelyAux(grid, startRow, endRow, startCol, endCol) {
+  if (endRow - startRow < 6 || endCol - startCol < 6) {
+    return;
+  }
+
+  divideRow = Math.floor((startRow + endRow) / 2);
+  divideCol = Math.floor((startCol + endCol) / 2);
+
+  for (let j = startCol; j <= endCol; j++) {
+    grid.setVertexType(divideRow, j, WALL_VERTEX);
+    await Utils.sleep(DELAY_IN_MILLISEC * 2);
+  }
+
+  for (let i = startRow; i <= endRow; i++) {
+    grid.setVertexType(i, divideCol, WALL_VERTEX);
+    await Utils.sleep(DELAY_IN_MILLISEC * 2);
+  }
+
+  // open passage
+  leftColOpen = Utils.randomRange(startCol + 1, divideCol - 1);
+  grid.setVertexType(divideRow, leftColOpen, BLANK_VERTEX);
+
+  bottomRowOpen = Utils.randomRange(divideRow + 1, endRow - 1)
+  grid.setVertexType(bottomRowOpen, divideCol, BLANK_VERTEX);
+
+  rightColOpen = Utils.randomRange(divideCol + 1, endCol - 1)
+  grid.setVertexType(divideRow, rightColOpen, BLANK_VERTEX);
+
+  // go to upper-left sub-grid
+  await generateMazeRecursivelyAux(grid, startRow, divideRow - 1, startCol, divideCol - 1);
+
+  // go to upper-right sub-grid
+  await generateMazeRecursivelyAux(grid, startRow, divideRow - 1, divideCol, endCol - 1);
+
+  // go to bottom-left sub-grid
+  await generateMazeRecursivelyAux(grid, divideRow, endRow - 1, startCol, divideCol - 1);
+
+  // go to bottom-right sub-grid
+  await generateMazeRecursivelyAux(grid, divideRow, endRow - 1, divideCol, endCol - 1);
+}
+
+async function createMazeFrame(grid) {
+  for (i = 0; i < grid.getRows(); i++) {
+    grid.setVertexType(i, 0, WALL_VERTEX);
+    await Utils.sleep(DELAY_IN_MILLISEC * 2);
+  }
+
+  for (j = 0; j < grid.getCols(); j++) {
+    grid.setVertexType(0, j, WALL_VERTEX);
+    await Utils.sleep(DELAY_IN_MILLISEC * 2);
+  }
+
+  for (i = 0; i < grid.getRows(); i++) {
+    grid.setVertexType(i, grid.getCols() - 1, WALL_VERTEX);
+    await Utils.sleep(DELAY_IN_MILLISEC * 2);
+  }
+
+  for (j = 0; j < grid.getCols(); j++) {
+    grid.setVertexType(grid.getRows() - 1, j, WALL_VERTEX);
+    await Utils.sleep(DELAY_IN_MILLISEC) * 2;
+  }
+}
+
+async function generateMazeRecursively(grid) {
+  grid.clearWalls();
+  await createMazeFrame(grid);
+  await generateMazeRecursivelyAux(grid, 1, grid.getRows() - 2, 1, grid.getCols() - 2);
+}
+
 async function GenerateMazeIterative(grid, initVertex) {
   // Start with grid full of walls
   for (let vertex of grid.vertices) {
@@ -13,7 +82,7 @@ async function GenerateMazeIterative(grid, initVertex) {
   stack.push(vertex);
 
   while (!stack.isEmpty()) {
-    await sleep(500);
+    await Utils.sleep(500);
     let current = stack.pop();
 
     // Choose random free direction
@@ -69,7 +138,7 @@ async function GenerateMazePrim() {
       wallsSet.add(wallVertex);
     }
     wallsSet.delete(wallVertex);
-    await sleep(500);
+    await Utils.sleep(500);
   }
 }
 
