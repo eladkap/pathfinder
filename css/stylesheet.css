@@ -8,6 +8,8 @@ body {
     background-color: var(--background-color);
 
     --text-color: white;
+    --header-color: white;
+    --header-color-disabled: rgb(170, 64, 64);
     --background-color: rgb(250, 250, 250);
     --navbar-backcolor: #2d394b;
     --canvas-backcolor: rgb(250, 250, 250);

@@ -11,6 +11,7 @@ class Application {
 
         this.draggedVertex = null;
 
+        this.btnGenerateMaze = null;
         this.btnGenerateWalls = null;
         this.btnClearWalls = null;
         this.btnSearch = null;
@@ -18,7 +19,6 @@ class Application {
         this.searchAlgo = null;
         this.algoSpeedSelector = null;
         this.algoSpeed = null;
-
         this.btnClearPath = null;
     }
 
@@ -72,16 +72,17 @@ class Application {
     }
 
     setButtons() {
+        this.btnGenerateMaze = document.getElementById('a-generate-maze');
         this.btnGenerateWalls = document.getElementById('a-generate-walls');
         this.btnClearWalls = document.getElementById('a-clear-walls');
-        this.btnSearch = document.getElementById('a-search');
+        this.btnSearch = document.getElementById('btn-visualize');
         this.btnClearPath = document.getElementById('a-clear-path');
     }
 
     setEnabled(control, value) {
         control.disabled = !value;
-        let color = value ? 'var(--btn-backcolor)' : 'var(--btn-backcolor-disabled)';
-        control.style.background = color;
+        let color = value ? 'var(--header-color)' : 'var(--header-color-disabled)';
+        control.style.color = color;
     }
 
     setSearchAlgoSelector() {
@@ -222,17 +223,17 @@ class Application {
 
     async runSearch() {
         console.log('Run search');
-        // todo: setEnable(false) to all links and visualize button
+        this.setEnabledControls(false);
         let result = await this.startSearch();
         console.log('Search finished');
         if (result) {
           console.log('Path found.');
-          this.showPath();
+          await this.showPath();
         } else {
           console.log('No path found.');
           window.alert('No path found.');
         }
-        // todo: setEnable(true) to all links and visualize button
+        this.setEnabledControls(true);
     }
 
     async startSearch() {
@@ -262,10 +263,21 @@ class Application {
         }
     }
 
+    setEnabledControls(b) {
+        this.setEnabled(this.btnGenerateMaze, b);
+        this.setEnabled(this.btnGenerateWalls, b);
+        this.setEnabled(this.btnClearWalls, b);
+        this.setEnabled(this.btnSearch, b);
+        this.setEnabled(this.searchAlgoSelector, b);
+        this.setEnabled(this.algoSpeedSelector, b);
+        this.setEnabled(this.btnClearPath, b);
+    }
+
     setup() {
         this.setGrid();
         this.setButtons();
         this.setSearchAlgoSelector();
+        this.setAlgoSpeedSelector();
         this.setSearchAlgo();
         this.setAlgoSpeed();
         
