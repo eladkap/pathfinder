@@ -38,12 +38,12 @@ class Vertex {
     app.ctx.stroke();
     app.ctx.fill();
 
-    if (this.chosen) {
-      app.ctx.textAlign = 'center';
-      app.ctx.fillStyle = 'white';
-      app.ctx.fillText('*', this.pos.x + this.width / 2, this.pos.y);
-    }
-
+    // if (this.chosen) {
+    //   app.ctx.font = '20px Verdana';
+    //   app.ctx.textAlign = 'center';
+    //   app.ctx.fillStyle = 'white';
+    //   app.ctx.fillText('*', this.pos.x + this.r, this.pos.y);
+    // }
   }
 
   isVisited() {
