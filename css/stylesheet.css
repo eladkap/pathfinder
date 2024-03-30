@@ -21,6 +21,11 @@ body {
     --btn-forecolor: white;
     --btn-hover-forecolor: #40e0d0;
     --game-states-header-color: rgb(80, 140, 240);
+    --start-vertex-backcolor: rgb(200, 0, 0);
+    --start-vertex-chosen-backcolor: rgb(190, 100, 100);
+    --end-vertex-backcolor: rgb(0, 100, 0);
+    --end-vertex-chosen-backcolor: rgb(90, 150, 90);
+    --wall-backcolor: rgb(50, 50, 50);
 }
 
 canvas {

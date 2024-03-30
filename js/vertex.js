@@ -27,8 +27,12 @@ class Vertex {
     let borderClr = this.borderColor;
     let borderWei = this.borderWeight;
     if (this.chosen) {
-      borderClr = BLACK;
-      borderWei = 3;
+      if (this.vertexType == START_VERTEX) {
+        this.setBackcolor(getComputedStyle(document.body).getPropertyValue('--start-vertex-chosen-backcolor'));
+      }
+      else if (this.vertexType == END_VERTEX) {
+        this.setBackcolor(getComputedStyle(document.body).getPropertyValue('--end-vertex-chosen-backcolor'));
+      }
     }
     app.ctx.beginPath();
     app.ctx.lineWidth = borderWei;
@@ -37,6 +41,7 @@ class Vertex {
     app.ctx.rect(this.pos.x, this.pos.y, 2 * this.r, 2 * this.r);
     app.ctx.stroke();
     app.ctx.fill();
+
 
     // if (this.chosen) {
     //   app.ctx.font = '20px Verdana';
@@ -141,11 +146,11 @@ class Vertex {
     if (vertexType == BLANK_VERTEX) {
       this.setBackcolor(WHITE);
     } else if (vertexType == START_VERTEX) {
-      this.setBackcolor(RED);
+      this.setBackcolor(getComputedStyle(document.body).getPropertyValue('--start-vertex-backcolor'));
     } else if (vertexType == END_VERTEX) {
-      this.setBackcolor(GREEN);
+      this.setBackcolor(getComputedStyle(document.body).getPropertyValue('--end-vertex-backcolor'));
     } else if (vertexType == WALL_VERTEX) {
-      this.setBackcolor(GRAY1);
+      this.setBackcolor(getComputedStyle(document.body).getPropertyValue('--wall-backcolor'));
     } else if (this.isVisited()) {
       this.setBackcolor(YELLOW);
     }

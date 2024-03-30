@@ -57,7 +57,7 @@ async function astar(grid, startVertex, endVertex) {
         }
 
         let heuristics = neighbor.setHValue(
-          Utils.manhattanDistance(neighbor, endVertex)
+          Utils.euclideanDistance(neighbor, endVertex)
         );
         neighbor.setHValue(heuristics);
         neighbor.setFValue(neighbor.getGValue() + neighbor.getHValue());
