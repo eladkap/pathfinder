@@ -21,6 +21,7 @@ body {
     --btn-forecolor: white;
     --btn-hover-forecolor: #40e0d0;
     --game-states-header-color: rgb(80, 140, 240);
+    --dialog-backcolor: rgb(230, 230, 230);
     --start-vertex-backcolor: rgb(200, 0, 0);
     --start-vertex-chosen-backcolor: rgb(190, 100, 100);
     --end-vertex-backcolor: rgb(0, 100, 0);
@@ -138,5 +139,46 @@ select {
     font-size: medium;
     margin-left: 1rem;
     margin-top: 0.3rem;
+}
+
+.tutorial-dialog {
+    display: none;
+    background-color: var(--dialog-backcolor);
+    position: fixed;
+    z-index: 1;
+    border-style: solid;
+    margin-top: 100px;
+    margin-left: 20%;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    width: 60%;
+    height: 50%;
+    overflow: auto;
+}
+
+.tutorial-dialog h1 {
+    color: black;
+}
+
+.dialog-content {
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    margin-right: 20px;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 

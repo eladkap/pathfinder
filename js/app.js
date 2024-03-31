@@ -210,10 +210,11 @@ class Application {
         this.updateCanvas();
     }
 
-    generateMaze() {
-        console.log('gen maze');
-        generateMazeRecursively(this.grid);
+    async generateMaze() {
+        this.setEnabledControls(false);
+        await generateMazeRecursively(this.grid);
         this.updateCanvas();
+        this.setEnabledControls(true);
     }
 
     clearPath() {
@@ -271,6 +272,20 @@ class Application {
         this.setEnabled(this.searchAlgoSelector, b);
         this.setEnabled(this.algoSpeedSelector, b);
         this.setEnabled(this.btnClearPath, b);
+    }
+
+    openTutorialDialog() {
+        var dialog = document.getElementById("tutorial-dialog");
+        dialog.style.display = 'block';
+    }
+
+    closeTutorialDialog() {    
+        var dialog = document.getElementById("tutorial-dialog");
+        dialog.style.display = 'none';
+    }
+
+    onLoadApp() {
+        this.openTutorialDialog();
     }
 
     setup() {

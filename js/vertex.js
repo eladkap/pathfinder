@@ -42,7 +42,6 @@ class Vertex {
     app.ctx.stroke();
     app.ctx.fill();
 
-
     // if (this.chosen) {
     //   app.ctx.font = '20px Verdana';
     //   app.ctx.textAlign = 'center';

@@ -2,7 +2,7 @@ function getVertexWithLowestFValue(vertexSet) {
   minValue = vertexSet[0].getFValue();
   minIndex = 0;
   for (let i = 0; i < vertexSet.length; i++) {
-    if (vertexSet[i].getFValue() < vertexSet[minIndex].getFValue()) {
+    if (vertexSet[i].getFValue() < minValue) {
       minIndex = i;
       minValue = vertexSet[i].getFValue();
     }
@@ -10,23 +10,42 @@ function getVertexWithLowestFValue(vertexSet) {
   return vertexSet[minIndex];
 }
 
+async function astar2(grid, startVertex, endVertex) {
+  let queue = new Queue();
+  queue.enqueue(startVertex);
+  while (!queue.isEmpty()) {
+    let v = queue.dequeue();
+
+    if (v == endVertex) {
+      console.log("End.");
+      return true;
+    }
+
+    // Pick neighbor that has the lowest 
+    for (let neighbor of v.getNeighbors()) {
+
+    }
+  }
+}
+
 async function astar(grid, startVertex, endVertex) {
   console.log("A*");
 
   let openSet = [];
-  let closedSet = [];
 
-  openSet.push(startVertex);
-
-  // Init each vertex f value to infinity
   for (let i = 0; i < grid.rows; i++) {
     for (let j = 0; j < grid.cols; j++) {
       let vertex = grid.get(i, j);
       vertex.setFValue(Infinity);
+      vertex.setGValue(Infinity);
     }
   }
 
-  startVertex.setFValue(0);
+  startVertex.setGValue(0);
+  startVertex.setFValue(Utils.euclideanDistance(startVertex, endVertex));
+
+  openSet.push(startVertex);
+ 
   while (openSet.length > 0) {
     // Get the current vertex from open set that has the lowest f value
     let current = getVertexWithLowestFValue(openSet);
@@ -38,34 +57,16 @@ async function astar(grid, startVertex, endVertex) {
     }
 
     Utils.removeFromArray(openSet, current);
-    closedSet.push(current);
 
     for (let neighbor of current.getNeighbors()) {
-      if (
-        neighbor.getVertexType() != WALL_VERTEX &&
-        !closedSet.includes(neighbor)
-      ) {
-        let tempG = current.getGValue() + 1;
-
-        if (openSet.includes(neighbor)) {
-          if (tempG < neighbor.getGValue()) {
-            neighbor.setGValue(tempG);
-          }
-        } else {
-          neighbor.setGValue(tempG);
-          openSet.push(neighbor);
-        }
-
-        let heuristics = neighbor.setHValue(
-          Utils.euclideanDistance(neighbor, endVertex)
-        );
-        neighbor.setHValue(heuristics);
-        neighbor.setFValue(neighbor.getGValue() + neighbor.getHValue());
+      let d = neighbor.getVertexType() != WALL_VERTEX ? 1 : Infinity;
+      let gValue = current.getGValue() + d;
+      if (gValue < neighbor.getGValue()) {
         neighbor.setParent(current);
-
-        if (neighbor != endVertex) {
-          await Utils.sleep(DELAY_IN_MILLISEC);
-          neighbor.setBackcolor(BLUE);
+        neighbor.setGValue(gValue);
+        neighbor.setFValue(gValue + Utils.euclideanDistance(neighbor, endVertex));
+        if (!openSet.includes(neighbor)) {
+          openSet.push(neighbor);
         }
       }
     }
