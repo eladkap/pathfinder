@@ -10,24 +10,6 @@ function getVertexWithLowestFValue(vertexSet) {
   return vertexSet[minIndex];
 }
 
-async function astar2(grid, startVertex, endVertex) {
-  let queue = new Queue();
-  queue.enqueue(startVertex);
-  while (!queue.isEmpty()) {
-    let v = queue.dequeue();
-
-    if (v == endVertex) {
-      console.log("End.");
-      return true;
-    }
-
-    // Pick neighbor that has the lowest 
-    for (let neighbor of v.getNeighbors()) {
-
-    }
-  }
-}
-
 async function astar(grid, startVertex, endVertex) {
   console.log("A*");
 
