@@ -7,14 +7,14 @@ async function generateMazeRecursivelyAux(grid, startRow, endRow, startCol, endC
   divideCol = Math.floor((startCol + endCol) / 2);
 
   for (let j = startCol; j <= endCol; j++) {
-    if (grid.get(divideRow, j).getVertexType() != START_VERTEX) {
+    if (grid.get(divideRow, j).getVertexType() != START_VERTEX && grid.get(divideRow, j).getVertexType() != END_VERTEX) {
       grid.setVertexType(divideRow, j, WALL_VERTEX);
     }
     await Utils.sleep(DELAY_IN_MILLISEC * 2);
   }
 
   for (let i = startRow; i <= endRow; i++) {
-    if (grid.get(i, divideCol).getVertexType() != START_VERTEX) {
+    if (grid.get(i, divideCol).getVertexType() != START_VERTEX && grid.get(i, divideCol).getVertexType() != END_VERTEX) {
       grid.setVertexType(i, divideCol, WALL_VERTEX);
     }
     await Utils.sleep(DELAY_IN_MILLISEC * 2);
@@ -45,22 +45,30 @@ async function generateMazeRecursivelyAux(grid, startRow, endRow, startCol, endC
 
 async function createMazeFrame(grid) {
   for (i = 0; i < grid.getRows(); i++) {
-    grid.setVertexType(i, 0, WALL_VERTEX);
+    if (grid.get(i, 0).getVertexType() != START_VERTEX && grid.get(i, 0).getVertexType() != END_VERTEX) {
+      grid.setVertexType(i, 0, WALL_VERTEX);
+    }
     await Utils.sleep(DELAY_IN_MILLISEC * 2);
   }
 
   for (j = 0; j < grid.getCols(); j++) {
-    grid.setVertexType(0, j, WALL_VERTEX);
+    if (grid.get(0, j).getVertexType() != START_VERTEX && grid.get(0, j).getVertexType() != END_VERTEX) {
+      grid.setVertexType(0, j, WALL_VERTEX);
+    }
     await Utils.sleep(DELAY_IN_MILLISEC * 2);
   }
 
   for (i = 0; i < grid.getRows(); i++) {
-    grid.setVertexType(i, grid.getCols() - 1, WALL_VERTEX);
+    if (grid.get(i, grid.getCols() - 1).getVertexType() != START_VERTEX && grid.get(i, grid.getCols() - 1).getVertexType() != END_VERTEX) {
+      grid.setVertexType(i, grid.getCols() - 1, WALL_VERTEX);
+    }
     await Utils.sleep(DELAY_IN_MILLISEC * 2);
   }
 
   for (j = 0; j < grid.getCols(); j++) {
-    grid.setVertexType(grid.getRows() - 1, j, WALL_VERTEX);
+    if (grid.get(grid.getRows() - 1, j).getVertexType() != START_VERTEX && grid.get(grid.getRows() - 1, j).getVertexType() != END_VERTEX) {
+      grid.setVertexType(grid.getRows() - 1, j, WALL_VERTEX);
+    }
     await Utils.sleep(DELAY_IN_MILLISEC) * 2;
   }
 }

@@ -28,9 +28,6 @@ class Application {
         let gridRows = Math.floor(canvasRect.height / VERTEX_WIDTH) - 6;
         let gridCols = Math.floor(canvasRect.width / VERTEX_WIDTH) - 2;
         let vertexRadius = VERTEX_RADIUS
-        // let gridRows = GRID_ROWS;
-        // let gridCols = GRID_COLS;
-        // let vertexRadius = canvasRect.width / GRID_COLS;
 
         this.grid = new Grid(
             canvasRect.x + VERTEX_WIDTH,
