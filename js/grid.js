@@ -1,4 +1,13 @@
 class Grid {
+  /**
+   * C'tor
+   * 
+   * @param {number} x - left-top x position
+   * @param {number} y - left-top y position
+   * @param {number} rows - rows dimension
+   * @param {number} cols - columns dimension
+   * @param {number} vertexRadius - vertex radius
+   */
   constructor(x, y, rows, cols, vertexRadius) {
     this.pos = new Vector(x, y);
     this.rows = rows;
@@ -7,6 +16,14 @@ class Grid {
     this.setNeighbors();
   }
 
+  /**
+   * Initialize grid matrix
+   * 
+   * @param {number} rows - rows
+   * @param {number} cols - columns
+   * @param {number} vertexRadius - vertex radius
+   * @returns matrix
+   */
   initMatrix(rows, cols, vertexRadius) {
     this.vertices = [];
     let mat = [];
@@ -36,6 +53,9 @@ class Grid {
     return mat;
   }
 
+  /**
+   * Draw grid
+   */
   draw() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
@@ -44,30 +64,54 @@ class Grid {
     }
   }
 
+  /**
+   * 
+   * @returns grid rows number
+   */
   getRows() {
     return this.rows;
   }
 
+  /**
+   * 
+   * @returns grid columns number
+   */
   getCols() {
     return this.cols;
   }
 
+  /**
+   * 
+   * @param {number} i - i row
+   * @param {number} j - j column
+   * @returns {Vertex} vertex in (i, j) position
+   */
   get(i, j) {
     return this.mat[i][j];
   }
 
+  /**
+   * Set vertex type
+   * 
+   * @param {number} i - i row
+   * @param {number} j - j column
+   * @param {string} vertexType - vertex type (WALL, START, END, BLANK)
+   */
   setVertexType(i, j, vertexType) {
     this.mat[i][j].setVertexType(vertexType);
   }
 
+  /**
+   * 
+   * @returns grid size
+   */
   size() {
     return this.rows * this.cols;
   }
 
-  getDist(u, v) {
-    return 1;
-  }
-
+  /**
+   * Set vertex neihbors (left, right, top, bottom)
+   */
   setNeighbors() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
@@ -103,10 +147,9 @@ class Grid {
     }
   }
 
-  setVertexType(i, j, vertexType) {
-    this.mat[i][j].setVertexType(vertexType);
-  }
-
+  /**
+   * Clear walls
+   */
   clearWalls() {
     for (let vertex of this.vertices) {
       if (vertex.vertexType == WALL_VERTEX) {
@@ -115,6 +158,9 @@ class Grid {
     }
   }
 
+  /**
+   * Reset grid
+   */
   reset() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {

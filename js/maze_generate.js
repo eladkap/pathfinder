@@ -7,12 +7,16 @@ async function generateMazeRecursivelyAux(grid, startRow, endRow, startCol, endC
   divideCol = Math.floor((startCol + endCol) / 2);
 
   for (let j = startCol; j <= endCol; j++) {
-    grid.setVertexType(divideRow, j, WALL_VERTEX);
+    if (grid.get(divideRow, j).getVertexType() != START_VERTEX) {
+      grid.setVertexType(divideRow, j, WALL_VERTEX);
+    }
     await Utils.sleep(DELAY_IN_MILLISEC * 2);
   }
 
   for (let i = startRow; i <= endRow; i++) {
-    grid.setVertexType(i, divideCol, WALL_VERTEX);
+    if (grid.get(i, divideCol).getVertexType() != START_VERTEX) {
+      grid.setVertexType(i, divideCol, WALL_VERTEX);
+    }
     await Utils.sleep(DELAY_IN_MILLISEC * 2);
   }
 
